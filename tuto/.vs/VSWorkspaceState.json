@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\config",
+    "\\src",
+    "\\src\\AppBundle",
+    "\\src\\AppBundle\\Controller"
+  ],
+  "SelectedNode": "\\src\\AppBundle\\Controller\\HelloWorld.php",
+  "PreviewInSolutionExplorer": false
+}

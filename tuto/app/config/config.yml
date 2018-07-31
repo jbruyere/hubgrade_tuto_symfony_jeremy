@@ -69,3 +69,15 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+doctrine:
+    dbal:
+        driver:     pdo_mysql
+        host:       '%database_host%'
+        dbname:     '%database_name%'
+        user:       '%database_user%'
+        password:   '%database_password'
+        charset:    utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
