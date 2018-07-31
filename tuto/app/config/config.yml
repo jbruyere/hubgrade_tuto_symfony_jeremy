@@ -11,6 +11,30 @@ parameters:
 sensio_framework_extra:
     view: { annotations: false }
 
+fos_rest:
+    view:
+        formats:
+            rss: false
+            xml: false
+            json: true
+            jsonp: false
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+        jsonp_handler:
+            callback_param: false
+    disable_csrf_role: ROLE_API
+    routing_loader:
+        default_format: json
+        include_format: false
+    format_listener:
+        rules:
+            - priorities: [json, xml]
+            - fallback_format: xml
+
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
@@ -34,6 +58,8 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+    serializer:
+        enabled: true
 
 # Twig Configuration
 twig:
