@@ -1,10 +1,10 @@
 AppBundle\Entity\Log:
     constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: login
     properties:
-        name:
+        login:
             - NotBlank: ~
             - Type: string
-        address:
+        password:
             - NotBlank: ~
             - Type: string

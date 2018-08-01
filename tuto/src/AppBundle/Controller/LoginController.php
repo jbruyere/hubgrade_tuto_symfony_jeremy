@@ -27,3 +27,4 @@ class LoginController extends FOSRestController
 	return $this->handleView($view);
 	}
 }
+?>

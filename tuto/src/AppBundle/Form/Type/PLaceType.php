@@ -9,14 +9,14 @@ class PLaceType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('login');
+		$builder->add('login', LoginType::class);
 		$builder->add('address');
 	}
 
 	public function configureOptions(OptionsResolver $resolver)
 	{
-		$resolver->setDefults([
-			'data_class' => 'AppBundle\Entity\Place',
+		$resolver->setDefaults([
+			'data_class' => 'AppBundle\Entity\Login',
 			'csrf_protection' => false
 		]);
 	}

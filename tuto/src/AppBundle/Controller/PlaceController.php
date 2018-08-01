@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\Get;
 use AppBundle\Entity\Log;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class PlaceController extends Controller
 {
@@ -15,12 +16,12 @@ class PlaceController extends Controller
      */
     public function getPlacesAction(Request $request)
     {
-        $login = $this->get('doctrine.orm.entity_manager')
+        /*$login = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:Log')
                 ->findAll();
         /* @var $login Log[] */
 
-        $formatted = [];
+        /*$formatted = [];
         foreach ($login as $log) {
             $formatted[] = [
                'login' => $log->getLogin(),
@@ -28,7 +29,19 @@ class PlaceController extends Controller
             ];
         }
 
-        return new JsonResponse($formatted);
+        return new JsonResponse($formatted);*/
+		$log = new Login();
+		$form = $this->createForm(LoginType::class, $log);
+		$form->submit($request->request->all());
+
+		if ($form->isValid()) {
+			$em = $this->get('doctrine.orm.entity_manager');
+			$em->persist($log);
+			$em->flush();
+			return $log;
+		} else {
+			return $form;
+		}
     }
 
 	/**
@@ -53,3 +66,4 @@ class PlaceController extends Controller
         return new JsonResponse($formatted);
     }
 }
+?>

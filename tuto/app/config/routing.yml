@@ -6,6 +6,10 @@ places:
     type:       rest
     resource:   AppBundle\Controller\PlaceController
 
-logins:
+login:
     type:       rest
     resource:   AppBundle\Controller\LoginController
+
+register:
+    type:       rest
+    resource:   AppBundle\Controller\RegistrationController

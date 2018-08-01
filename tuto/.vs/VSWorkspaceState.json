@@ -3,10 +3,16 @@
     "",
     "\\app",
     "\\app\\config",
+    "\\app\\Resources\\views",
     "\\src",
     "\\src\\AppBundle",
-    "\\src\\AppBundle\\Controller"
+    "\\src\\AppBundle\\Controller",
+    "\\src\\AppBundle\\Entity",
+    "\\src\\AppBundle\\Form",
+    "\\src\\AppBundle\\Form\\Type",
+    "\\src\\AppBundle\\Resources",
+    "\\tests\\AppBundle"
   ],
-  "SelectedNode": "\\src\\AppBundle\\Controller\\HelloWorld.php",
+  "SelectedNode": "\\src\\AppBundle\\Controller\\PlaceController.php",
   "PreviewInSolutionExplorer": false
 }
