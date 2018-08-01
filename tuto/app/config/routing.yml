@@ -2,10 +2,6 @@ app:
     resource: "@AppBundle/Controller/DefaultController.php"
     type:     annotation
 
-places:
-    type:       rest
-    resource:   AppBundle\Controller\PlaceController
-
 login:
     type:       rest
     resource:   AppBundle\Controller\LoginController
@@ -13,3 +9,7 @@ login:
 register:
     type:       rest
     resource:   AppBundle\Controller\RegistrationController
+
+##auth-tokens:
+##   type:       rest
+##    resource:   AppBundle\Controller\AuthTokenController

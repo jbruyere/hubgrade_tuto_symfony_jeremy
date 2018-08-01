@@ -1,6 +1,15 @@
-AppBundle\Entity\Log:
+AppBundle\Entity\User:
     constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: login
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        username:
+            - NotBlank: ~
+            - Type: string
+        password:
+            - NotBlank: ~
+            - Type: string
+
+AppBundle\Entity\Credentials:
     properties:
         login:
             - NotBlank: ~
