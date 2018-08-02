@@ -11,12 +11,13 @@ use AppBundle\Entity\User;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 
+// login avec ma méthode -> pas de token, et test tous les user, pas génial
 class LoginController extends FOSRestController
 {
 	/**
 	* @Rest\View(statusCode=Response::HTTP_CREATED)
-	* @Rest\Post("/login")
-	* @Route("/register", name="user_login")
+	* @Rest\Post("/login2")
+	* @Route("/login2", name="user_login")
 	*/
 	public function loginAction(Request $request)
 	{

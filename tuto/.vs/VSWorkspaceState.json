@@ -1,18 +1,16 @@
 {
   "ExpandedNodes": [
-    "",
     "\\app",
-    "\\app\\config",
-    "\\app\\Resources\\views",
+    "\\app\\Resources",
+    "\\bin",
     "\\src",
     "\\src\\AppBundle",
-    "\\src\\AppBundle\\Controller",
     "\\src\\AppBundle\\Entity",
     "\\src\\AppBundle\\Form",
-    "\\src\\AppBundle\\Form\\Type",
     "\\src\\AppBundle\\Resources",
-    "\\tests\\AppBundle"
+    "\\src\\AppBundle\\Resources\\config",
+    "\\web"
   ],
-  "SelectedNode": "\\src\\AppBundle\\Controller\\PlaceController.php",
+  "SelectedNode": "\\app\\config\\routing.yml",
   "PreviewInSolutionExplorer": false
 }

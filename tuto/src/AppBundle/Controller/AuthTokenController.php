@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,34 +17,33 @@ class AuthTokenController extends FOSRestController
 {
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"auth-token"})
-     * @Rest\Post("/auth-tokens")
-	 * @Route("/auth-tokens", name="user_tokens")
+     * @Rest\Post("/login")
+	 * @Route("/login", name="user_tokens")
      */
     public function postAuthTokensAction(Request $request)
     {
-        $credentials = new Credentials();
+		$credentials = new Credentials();
         $form = $this->createForm(CredentialsType::class, $credentials);
 
         $form->submit($request->request->all());
 
         if (!$form->isValid()) {
-            return $this->invalidCredentials();
+            return $this->invalidCredentials('Invalid credentials');
         }
 
         $em = $this->get('doctrine.orm.entity_manager');
 
         $user = $em->getRepository('AppBundle:User')
-            ->findOneByEmail($credentials->getLogin());
+            ->findOneByUsername($credentials->getUsername());
 		
         if (!$user) {
-            return $this->invalidCredentials();
+            return $this->invalidCredentials('Invalid user');
         }
-
         $encoder = $this->get('security.password_encoder');
         $isPasswordValid = $encoder->isPasswordValid($user, $credentials->getPassword());
 
         if (!$isPasswordValid) {
-            return $this->invalidCredentials();
+            return $this->invalidCredentials('Invalid password');
         }
 
         $authToken = new AuthToken();
@@ -54,16 +54,19 @@ class AuthTokenController extends FOSRestController
         $em->persist($authToken);
         $em->flush();
 
-        $view = $this->view(array(
-		'username' => $request->get('username'), 200);
+		echo 'connected';
+        $view = $this->view(
+		array(
+		'username' => $request->get('username')
+		), 200);
 
 		return $this->handleView($view);
     }
 
-    private function invalidCredentials()
+    private function invalidCredentials($value)
     {
         $view = $this->view(array(
-		'message' => 'invalid credentials.'), 500);
+		'message' => $value), 500);
 
 		return $this->handleView($view);
     }

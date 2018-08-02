@@ -3,18 +3,18 @@ namespace AppBundle\Entity;
 
 class Credentials
 {
-    protected $login;
+    protected $username;
 
     protected $password;
 
-    public function getLogin()
+    public function getUsername()
     {
-        return $this->login;
+        return $this->username;
     }
 
-    public function setLogin($login)
+    public function setUsername($username)
     {
-        $this->login = $login;
+        $this->username = $username;
     }
 
     public function getPassword()

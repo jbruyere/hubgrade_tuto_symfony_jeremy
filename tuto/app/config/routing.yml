@@ -10,6 +10,6 @@ register:
     type:       rest
     resource:   AppBundle\Controller\RegistrationController
 
-##auth-tokens:
-##   type:       rest
-##    resource:   AppBundle\Controller\AuthTokenController
+auth-tokens:
+    type:       rest
+    resource:   AppBundle\Controller\AuthTokenController

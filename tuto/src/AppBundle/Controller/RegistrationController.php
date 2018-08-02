@@ -25,7 +25,7 @@ class RegistrationController extends FOSRestController //Controller
 	{
 		$user = new User();
 		$password = $this->get('security.password_encoder')
-				->encodePassword($user, $user->getPlainPassword());
+				->encodePassword($user, $request->get('password'));
 		$user->setPassword($password);
 		$form = $this->createForm(UserType::class, $user);
 		$form->submit($request->request->all());
