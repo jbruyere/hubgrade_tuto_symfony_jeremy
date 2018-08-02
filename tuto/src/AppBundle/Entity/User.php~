@@ -325,28 +325,4 @@ class User implements UserInterface
     {
         return $this->inscriptionDate;
     }
-
-    /**
-     * Set bio.
-     *
-     * @param string|null $bio
-     *
-     * @return User
-     */
-    public function setBio($bio = null)
-    {
-        $this->bio = $bio;
-
-        return $this;
-    }
-
-    /**
-     * Get bio.
-     *
-     * @return string|null
-     */
-    public function getBio()
-    {
-        return $this->bio;
-    }
 }
