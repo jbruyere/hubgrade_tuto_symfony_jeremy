@@ -64,15 +64,11 @@ class PostController extends FOSRestController
 	* @Rest\Post("/post/read/{id}")
 	* @Route("/post/read/{id}")
 	*/
-	public function readPostAction($id, Request $request)
+	public function readPostAction($id)
 	{
-		if ($request->get('id') == null)
-		{
-			return $this->invalidPost('Invalid ID.');
-		}
 		$em = $this->get('doctrine.orm.entity_manager');
 		$post = $this->getDoctrine()
-			->getRepository('AppBundle:Post')->getPostFromId($id, $request);
+			->getRepository('AppBundle:Post')->getPostFromId($id);
 		if ($post == null) {
 			return $this->invalidPost('Invalid post.');
 		}
@@ -80,6 +76,35 @@ class PostController extends FOSRestController
 			'UserId' => $post[0]->getUser(),
 			'postId' => $post[0]->getId(),
 			'content' => $post[0]->getContent()
+			);
+		$view = $this->view($data, 200);
+
+		return $this->handleView($view);
+	}
+
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Delete("/post/delete/{id}")
+	* @Route("/post/delete/{id}")
+	*/
+	//at least: token(authorization)
+	public function deletePostAction($id, Request $request)
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidPost('User not connected.');
+		}
+		$post = $this->getDoctrine()
+			->getRepository('AppBundle:Post')->getPostFromId($id);
+		if ($post == null || $user[0]['id'] != $post[0]->getUser()) {
+			return $this->invalidPost('You cannot delete this post.');
+		}
+		$this->getDoctrine()
+			->getRepository('AppBundle:Post')->deletePostFromId($id);
+		$data = array(
+			'deleted post' => $id
 			);
 		$view = $this->view($data, 200);
 
