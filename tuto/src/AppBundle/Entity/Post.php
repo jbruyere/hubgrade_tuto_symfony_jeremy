@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository\PostRepository")
  * @ORM\Table(name="post")
  */
 
@@ -36,17 +36,20 @@ use Doctrine\ORM\Mapping as ORM;
 	private $creationDate;
 
 	/**
+	* @ORM\Column(nullable=true)
 	* @ORM\Column(type="datetime")
 	*/
 	private $editionDate;
 
 	/**
+	* @ORM\Column(nullable=true)
 	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment",
 	mappedBy="post")
 	*/
 	private $comments;
 	
 	/**
+	* @ORM\Column(nullable=true)
 	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment",
 	mappedBy="post")
 	*/

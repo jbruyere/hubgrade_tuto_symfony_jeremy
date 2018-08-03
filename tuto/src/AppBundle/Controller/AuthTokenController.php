@@ -20,6 +20,7 @@ class AuthTokenController extends FOSRestController
      * @Rest\Post("/login")
 	 * @Route("/login", name="user_tokens")
      */
+	 // at least: username, password
     public function postAuthTokensAction(Request $request)
     {
 		$credentials = new Credentials();
@@ -54,10 +55,11 @@ class AuthTokenController extends FOSRestController
         $em->persist($authToken);
         $em->flush();
 
-		echo 'connected';
+		echo 'connected : ';
         $view = $this->view(
 		array(
-		'username' => $request->get('username')
+		'username' => $request->get('username'),
+		'token' => $authToken->getValue()
 		), 200);
 
 		return $this->handleView($view);

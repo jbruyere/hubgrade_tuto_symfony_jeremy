@@ -23,6 +23,7 @@ class RegistrationController extends FOSRestController //Controller
 	* @Rest\Post("/register")
 	* @Route("/register", name="user_registration")
 	*/
+	//at least : username, pseudo, email, password
 	public function registerAction(Request $request)
 	{
 		$user = new User();

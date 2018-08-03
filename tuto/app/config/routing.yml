@@ -13,3 +13,7 @@ register:
 auth-tokens:
     type:       rest
     resource:   AppBundle\Controller\AuthTokenController
+
+post:
+    type:       rest
+    resource:   AppBundle\Controller\PostController

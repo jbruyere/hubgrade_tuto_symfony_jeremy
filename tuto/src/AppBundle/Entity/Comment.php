@@ -35,6 +35,7 @@ use Doctrine\ORM\Mapping as ORM;
 	private $creationDate;
 
 	/**
+	* @ORM\Column(nullable=true)
 	* @ORM\ManyToMany(targetEntity="AppBundle\Entity\Like",
 	cascade={"persist"})
 	*/
