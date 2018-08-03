@@ -111,6 +111,44 @@ class PostController extends FOSRestController
 		return $this->handleView($view);
 	}
 
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Put("/post/update/{id}")
+	* @Route("/post/update/{id}")
+	*/
+	//at least: content, token(authorization)
+	public function updatePostAction($id, Request $request)
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidPost('User not connected.');
+		}
+		$post = $this->getDoctrine()
+			->getRepository('AppBundle:Post')->getPostFromId($id);
+		if ($post == null || $user[0]['id'] != $post[0]->getUser()) {
+			return $this->invalidPost('You cannot update this post.');
+		}
+		if ($request->get('content') == null) {
+			return $this->invalidPost('You have to set a new content.');
+		}
+		$post[0]->setContent($request->get('content'));
+		$post[0]->setEditionDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
+
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($post[0]);
+		$em->flush();
+		
+		$this->displayPosts();
+		$data = array(
+			'userId' => $post[0]->getUser(),
+			'content (update)' => $request->get('content')
+			);
+		$view = $this->view($data, 200);
+		return $this->handleView($view);
+	}
+
 	private function displayPosts()
 	{
 		$repository = $this->getDoctrine()

@@ -36,8 +36,7 @@ use Doctrine\ORM\Mapping as ORM;
 	private $creationDate;
 
 	/**
-	* @ORM\Column(nullable=true)
-	* @ORM\Column(type="datetime")
+	* @ORM\Column(type="datetime", nullable=true)
 	*/
 	private $editionDate;
 
