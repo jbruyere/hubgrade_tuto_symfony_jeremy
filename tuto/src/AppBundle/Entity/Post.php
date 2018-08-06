@@ -41,25 +41,23 @@ use Doctrine\ORM\Mapping as ORM;
 	private $editionDate;
 
 	/**
-	* @ORM\Column(nullable=true)
 	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment",
 	mappedBy="post")
 	*/
 	private $comments;
 	
 	/**
-	* @ORM\Column(nullable=true)
 	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment",
 	mappedBy="post")
 	*/
-	private $likes;
+	private $liks;
      /**
      * Constructor
      */
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->likes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->liks = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -205,38 +203,66 @@ use Doctrine\ORM\Mapping as ORM;
     }
 
     /**
-     * Add like.
+     * Add lik.
      *
-     * @param \AppBundle\Entity\Comment $like
+     * @param \AppBundle\Entity\Comment $lik
      *
      * @return Post
      */
-    public function addLike(\AppBundle\Entity\Comment $like)
+    public function addLik(\AppBundle\Entity\Comment $lik)
     {
-        $this->likes[] = $like;
+        $this->liks[] = $lik;
 
         return $this;
     }
 
     /**
-     * Remove like.
+     * Remove lik.
      *
-     * @param \AppBundle\Entity\Comment $like
+     * @param \AppBundle\Entity\Comment $lik
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeLike(\AppBundle\Entity\Comment $like)
+    public function removeLik(\AppBundle\Entity\Comment $lik)
     {
-        return $this->likes->removeElement($like);
+        return $this->liks->removeElement($lik);
     }
 
     /**
-     * Get likes.
+     * Get liks.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLikes()
+    public function getLiks()
     {
-        return $this->likes;
+        return $this->liks;
+    }
+
+    /**
+     * Set comments.
+     *
+     * @param string|null $comments
+     *
+     * @return Post
+     */
+    public function setComments($comments = null)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Set liks.
+     *
+     * @param string|null $liks
+     *
+     * @return Post
+     */
+    public function setLiks($liks = null)
+    {
+        $this->liks = $liks;
+
+        return $this;
     }
 }

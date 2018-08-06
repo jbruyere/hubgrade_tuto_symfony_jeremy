@@ -18,6 +18,10 @@ post:
     type:       rest
     resource:   AppBundle\Controller\PostController
 
-like:
+lik:
     type:       rest
-    resource:   AppBundle\Controller\LikeController
+    resource:   AppBundle\Controller\LikController
+
+comment:
+    type:       rest
+    resource:   AppBundle\Controller\CommentController

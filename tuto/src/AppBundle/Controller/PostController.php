@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\User;
-use AppBundle\Entity\Like;
+use AppBundle\Entity\Lik;
 use AppBundle\Entity\AuthToken;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Controller\Registration;

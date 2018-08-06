@@ -4,7 +4,7 @@ namespace AppBundle\Repository\LikeRepository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\Post;
-use AppBundle\Entity\Like;
+use AppBundle\Entity\Lik;
 
 class LikeRepository extends EntityRepository
 {
@@ -12,8 +12,8 @@ class LikeRepository extends EntityRepository
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();
 
-		$qb->select('\'like\'')
-			->from('AppBundle:Like', 'lik')
+		$qb->select('lik')
+			->from('AppBundle:Lik', 'lik')
 			->where('lik.posts = :id')
 			->setParameter('id', $id);
 
@@ -25,7 +25,7 @@ class LikeRepository extends EntityRepository
 		$qb = $this->getEntityManager()->createQueryBuilder();
 
 		$qb->delete()
-			->from('AppBundle:Like', 'lik')
+			->from('AppBundle:Lik', 'lik')
 			->where('lik.posts = :id')
 			->setParameter('id', $id);
 

@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\app",
     "\\app\\config",
-    "\\app\\Resources\\views",
     "\\src",
     "\\src\\AppBundle",
     "\\src\\AppBundle\\Controller",
     "\\src\\AppBundle\\Entity",
+    "\\src\\AppBundle\\Form",
     "\\src\\AppBundle\\Repository",
-    "\\src\\AppBundle\\Repository\\PostRepository",
-    "\\src\\AppBundle\\Repository\\UserRepository"
+    "\\src\\AppBundle\\Repository\\CommentRepository"
   ],
-  "SelectedNode": "\\src\\AppBundle\\Repository\\PostRepository\\PostRepository.php",
+  "SelectedNode": "\\src\\AppBundle\\Controller\\LikeController.php",
   "PreviewInSolutionExplorer": false
 }

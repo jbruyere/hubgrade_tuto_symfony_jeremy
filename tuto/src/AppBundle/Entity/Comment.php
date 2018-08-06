@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository\CommentRepository")
  * @ORM\Table(name="comment")
  */
  class Comment 
@@ -36,16 +36,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 	/**
 	* @ORM\Column(nullable=true)
-	* @ORM\ManyToMany(targetEntity="AppBundle\Entity\Like",
+	* @ORM\ManyToMany(targetEntity="AppBundle\Entity\Lik",
 	cascade={"persist"})
 	*/
-	private $like;
+	private $lik;
      /**
      * Constructor
      */
     public function __construct()
     {
-        $this->like = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lik = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -131,38 +131,52 @@ use Doctrine\ORM\Mapping as ORM;
     }
 
     /**
-     * Add like.
+     * Add lik.
      *
-     * @param \AppBundle\Entity\Like $like
+     * @param \AppBundle\Entity\Lik $lik
      *
      * @return Comment
      */
-    public function addLike(\AppBundle\Entity\Like $like)
+    public function addLik(\AppBundle\Entity\Lik $lik)
     {
-        $this->like[] = $like;
+        $this->lik[] = $lik;
 
         return $this;
     }
 
     /**
-     * Remove like.
+     * Remove lik.
      *
-     * @param \AppBundle\Entity\Like $like
+     * @param \AppBundle\Entity\Lik $lik
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeLike(\AppBundle\Entity\Like $like)
+    public function removeLik(\AppBundle\Entity\Lik $lik)
     {
-        return $this->like->removeElement($like);
+        return $this->lik->removeElement($lik);
     }
 
     /**
-     * Get like.
+     * Get lik.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLike()
+    public function getLik()
     {
-        return $this->like;
+        return $this->lik;
+    }
+
+    /**
+     * Set lik.
+     *
+     * @param string|null $lik
+     *
+     * @return Comment
+     */
+    public function setLik($lik = null)
+    {
+        $this->lik = $lik;
+
+        return $this;
     }
 }
