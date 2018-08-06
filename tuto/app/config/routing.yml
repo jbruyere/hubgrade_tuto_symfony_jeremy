@@ -17,3 +17,7 @@ auth-tokens:
 post:
     type:       rest
     resource:   AppBundle\Controller\PostController
+
+like:
+    type:       rest
+    resource:   AppBundle\Controller\LikeController

@@ -5,8 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="like")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LikeRepository\LikeRepository")
+ * @ORM\Table(name="`like`")
  */
  class Like
  {
@@ -24,11 +24,15 @@ use Doctrine\ORM\Mapping as ORM;
 	*/
 	private $user;
 
+	/**
+	 * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Comment")
+	 * @ORM\JoinColumn(nullable=true)
+	*/
 	private $comments;
 
-	/**
+	/**	
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post")
-	 * @ORM\JoinColumn(nullable=false)
+	 * @ORM\JoinColumn(nullable=true)
 	*/
 	private $posts;
  
