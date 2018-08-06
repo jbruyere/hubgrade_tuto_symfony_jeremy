@@ -31,5 +31,29 @@ class LikeRepository extends EntityRepository
 
 		return $qb->getQuery()->getResult();
 	}
+
+	public function getLikeFromComment($id)
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+
+		$qb->select('lik')
+			->from('AppBundle:Lik', 'lik')
+			->where('lik.comments = :id')
+			->setParameter('id', $id);
+
+		return $qb->getQuery()->getResult();
+	}
+
+	public function deleteLikeFromComment($id)
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+
+		$qb->delete()
+			->from('AppBundle:Lik', 'lik')
+			->where('lik.comments = :id')
+			->setParameter('id', $id);
+
+		return $qb->getQuery()->getResult();
+	}
 }
 ?>

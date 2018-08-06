@@ -54,6 +54,15 @@ class AuthTokenController extends FOSRestController
 
         $em->persist($authToken);
         $em->flush();
+		$repository = $this->getDoctrine()
+			->getManager()->getRepository('AppBundle:AuthToken');
+		$list = $repository->findAll();
+
+		echo '<p>DB : <br /></p>';
+		foreach ($list as $us) {
+			echo '<p> username : '
+			.$us->getUser()->getUsername().' token :'.$us->getValue().'</p>';
+		}
 
 		echo 'connected : ';
         $view = $this->view(

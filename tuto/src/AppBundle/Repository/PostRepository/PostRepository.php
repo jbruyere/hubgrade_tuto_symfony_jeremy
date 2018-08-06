@@ -15,7 +15,7 @@ class PostRepository extends EntityRepository
 			->from('AppBundle:Post', 'post')
 			->where('post.id = :id')
 			->setParameter('id', $id);
-
+		
 		return $qb->getQuery()->getResult();
 	}
 

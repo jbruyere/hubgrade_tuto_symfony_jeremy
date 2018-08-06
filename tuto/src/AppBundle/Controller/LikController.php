@@ -39,7 +39,7 @@ class LikController extends FOSRestController
 		
 		$post = $this->getDoctrine()
 			->getRepository('AppBundle:Post')->getPostFromId($id);
-		if ($post == null) {
+		if ($post == null || $post[0] == null) {
 			return $this->invalidLike('Invalid post.');
 		}
 		
@@ -51,9 +51,48 @@ class LikController extends FOSRestController
 		$em->persist($like);
 		$em->flush();
 
+;		echo '<p> User '.$like->getUser().' like : </p>';
+		$data = array(
+			'postId' => $post[0]->getId(),
+			'from user' => $like->getUser()
+			);
+		$view = $this->view($data, 200);
+
+		return $this->handleView($view);
+	}
+
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Post("/post/comment/like/create/{id}")
+	* @Route("/post/comment/like/create/{id}")
+	*/
+	// at least: token(authorization)
+	public function createCommentLikeAction($id, Request $request)
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidLike('User not connected.');
+		}
+		
+		$comment = $this->getDoctrine()
+			->getRepository('AppBundle:Comment')->getCommentFromId($id);
+		if ($comment == null || $comment[0] == null) {
+			return $this->invalidLike('Invalid comment.');
+		}
+		
+		$like = new Lik();
+		$like->setUser($user[0]['id']);
+		$like->setComments($comment[0]);
+		
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($like);
+		$em->flush();
+
 		echo '<p> User '.$like->getUser().' like : </p>';
 		$data = array(
-			'postId' => $like->getPosts(),
+			'commentId' => $comment[0]->getId(),
 			'from user' => $like->getUser()
 			);
 		$view = $this->view($data, 200);
@@ -88,6 +127,36 @@ class LikController extends FOSRestController
 		}
 		$this->getDoctrine()
 			->getRepository('AppBundle:Lik')->deleteLikeFromPost($id);
+		$data = array(
+			'deleted like from id' => $id,
+			'by user' => $user[0]['id']
+			);
+		$view = $this->view($data, 200);
+
+		return $this->handleView($view);
+	}
+
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Delete("/post/comment/like/delete/{id}")
+	* @Route("/post/comment/like/delete/{id}")
+	*/
+	// at least: token(authorization)
+	public function deleteCommentLikeAction($id, Request $request)
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidLike('User not connected.');
+		}
+		$like = $this->getDoctrine()
+			->getRepository('AppBundle:Lik')->getLikeFromComment($id);
+		if (isset($like[0]) == false) {
+			return $this->invalidLike('Like does not exit.');
+		}
+		$this->getDoctrine()
+			->getRepository('AppBundle:Lik')->deleteLikeFromComment($id);
 		$data = array(
 			'deleted like from id' => $id,
 			'by user' => $user[0]['id']

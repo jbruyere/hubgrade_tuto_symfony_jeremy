@@ -47,10 +47,11 @@ use Doctrine\ORM\Mapping as ORM;
 	private $comments;
 	
 	/**
-	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment",
+	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Lik",
 	mappedBy="post")
 	*/
 	private $liks;
+
      /**
      * Constructor
      */

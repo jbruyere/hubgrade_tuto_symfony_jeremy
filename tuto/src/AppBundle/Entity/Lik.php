@@ -25,14 +25,12 @@ use Doctrine\ORM\Mapping as ORM;
 	private $user;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Comment")
-	 * @ORM\JoinColumn(nullable=true)
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Comment")
 	*/
 	private $comments;
 
 	/**	
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post")
-	 * @ORM\JoinColumn(nullable=true)
 	*/
 	private $posts;
  
@@ -70,14 +68,14 @@ use Doctrine\ORM\Mapping as ORM;
         return $this->user;
     }
 
-    /**
+	/**
      * Set posts.
      *
-     * @param \AppBundle\Entity\Post $posts
+     * @param \AppBundle\Entity\Post|null $posts
      *
      * @return Lik
      */
-    public function setPosts(\AppBundle\Entity\Post $posts)
+    public function setPosts(\AppBundle\Entity\Post $posts = null)
     {
         $this->posts = $posts;
 
@@ -92,13 +90,6 @@ use Doctrine\ORM\Mapping as ORM;
     public function getPosts()
     {
         return $this->posts;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -135,5 +126,19 @@ use Doctrine\ORM\Mapping as ORM;
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set comments.
+     *
+     * @param \AppBundle\Entity\Comment|null $comments
+     *
+     * @return Lik
+     */
+    public function setComments(\AppBundle\Entity\Comment $comments = null)
+    {
+        $this->comments = $comments;
+
+        return $this;
     }
 }

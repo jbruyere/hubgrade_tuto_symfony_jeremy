@@ -35,11 +35,11 @@ use Doctrine\ORM\Mapping as ORM;
 	private $creationDate;
 
 	/**
-	* @ORM\Column(nullable=true)
-	* @ORM\ManyToMany(targetEntity="AppBundle\Entity\Lik",
-	cascade={"persist"})
+	* @ORM\OneToMany(targetEntity="AppBundle\Entity\Lik",
+	mappedBy="comment")
 	*/
 	private $lik;
+
      /**
      * Constructor
      */
