@@ -61,7 +61,7 @@ class PostController extends FOSRestController
 
 	/**
 	* @Rest\View(statusCode=Response::HTTP_CREATED)
-	* @Rest\Post("/post/read/{id}")
+	* @Rest\Get("/post/read/{id}")
 	* @Route("/post/read/{id}")
 	*/
 	public function readPostAction($id)

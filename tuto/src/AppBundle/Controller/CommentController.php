@@ -104,7 +104,7 @@ class CommentController extends FOSRestController
 
 	/**
 	* @Rest\View(statusCode=Response::HTTP_CREATED)
-	* @Rest\Post("/post/comment/read/{id}")
+	* @Rest\Get("/post/comment/read/{id}")
 	* @Route("/post/comment/read/{id}")
 	*/
 	public function readCommentAction($id)
