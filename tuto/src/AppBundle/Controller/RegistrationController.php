@@ -46,7 +46,7 @@ class RegistrationController extends FOSRestController //Controller
 		$em->persist($user);
 		$em->flush();
 
-		echo '<p>New : <br /></p>';
+		/*echo '<p>New : <br /></p>';
 
 		$data = array(
 			'username' => $request->get('username'), 
@@ -55,7 +55,16 @@ class RegistrationController extends FOSRestController //Controller
 			);
 		$view = $this->view($data, 200);
 
-		return $this->handleView($view);
+		return $this->handleView($view);*/
+		$response = new Response();
+		$response->setContent(json_encode([
+			'username' => $request->get('username'),
+			'email' => $request->get('email'),
+			'pseudo' => $request->get('pseudo')
+		]));
+		$response->headers->set('Content-Type', 'application/json');
+		$response->headers->set('Access-Control-Allow-Origin', '*');
+		return $response;
 	}
 
 	private function getTime()
@@ -72,10 +81,10 @@ class RegistrationController extends FOSRestController //Controller
 			->getManager()->getRepository('AppBundle:User');
 		$list = $repository->findAll();
 
-		echo '<p>DB : <br /></p>';
+		//echo '<p>DB : <br /></p>';
 		foreach ($list as $us) {
-			echo '<p> username : '
-			.$us->getUsername().' email :'.$us->getEmail().'</p>';
+			//echo '<p> username : '
+			//.$us->getUsername().' email :'.$us->getEmail().'</p>';
 			if ($user->getUsername() === null
 				|| $user->getEmail() === null 
 				|| $us->getUsername() == $user->getUsername()

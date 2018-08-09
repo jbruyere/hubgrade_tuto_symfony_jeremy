@@ -6,11 +6,11 @@
     "\\src",
     "\\src\\AppBundle",
     "\\src\\AppBundle\\Controller",
+    "\\src\\AppBundle\\Entity",
     "\\src\\AppBundle\\Repository",
-    "\\src\\AppBundle\\Repository\\CommentRepository",
     "\\src\\AppBundle\\Repository\\LikeRepository",
-    "\\src\\AppBundle\\Repository\\PostRepository"
+    "\\src\\AppBundle\\Repository\\UserRepository"
   ],
-  "SelectedNode": "\\src\\AppBundle\\Controller\\CommentController.php",
+  "SelectedNode": "\\src\\AppBundle\\Repository\\UserRepository\\UserRepository.php",
   "PreviewInSolutionExplorer": false
 }

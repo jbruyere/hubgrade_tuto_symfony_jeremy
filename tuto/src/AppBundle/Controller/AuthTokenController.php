@@ -58,20 +58,28 @@ class AuthTokenController extends FOSRestController
 			->getManager()->getRepository('AppBundle:AuthToken');
 		$list = $repository->findAll();
 
-		echo '<p>DB : <br /></p>';
+		/*echo '<p>DB : <br /></p>';
 		foreach ($list as $us) {
 			echo '<p> username : '
 			.$us->getUser()->getUsername().' token :'.$us->getValue().'</p>';
 		}
 
-		echo 'connected : ';
-        $view = $this->view(
+		echo 'connected : ';*/
+        /*$view = $this->view(
 		array(
 		'username' => $request->get('username'),
 		'token' => $authToken->getValue()
 		), 200);
 
-		return $this->handleView($view);
+		return $this->handleView($view);*/
+		$response = new Response();
+		$response->setContent(json_encode([
+			'username' => $request->get('username'),
+			'token' => $authToken->getValue()
+		]));
+		$response->headers->set('Content-Type', 'application/json');
+		$response->headers->set('Access-Control-Allow-Origin', '*');
+		return $response;
     }
 
     private function invalidCredentials($value)

@@ -25,3 +25,7 @@ lik:
 comment:
     type:       rest
     resource:   AppBundle\Controller\CommentController
+
+user:
+    type:       rest
+    resource:   AppBundle\Controller\UserController

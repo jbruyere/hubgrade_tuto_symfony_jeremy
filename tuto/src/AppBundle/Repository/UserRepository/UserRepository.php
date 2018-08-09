@@ -35,7 +35,7 @@ class UserRepository extends EntityRepository
 		->from('AppBundle:AuthToken', 'auth')
 		->leftJoin('auth.user', 'u')
 		->where('auth.value = :tokenvalue')
-		->setParameter('tokenvalue', $tokenvalue);
+		->setParameter('tokenvalue', substr($tokenvalue, 7));
 
 	return $qb->getQuery()->getResult();
 	}
