@@ -150,3 +150,15 @@ nelmio_cors:
                 allow_headers: ['X-Custom-Auth', 'Origin', 'Authorization', 'X-Requested-With', 'Content-Type', 'Accept']
                 allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
                 max_age: 3600
+            '^/logout':
+                origin_regex: true
+                allow_origin: ['^http://localhost:[0-9]+']
+                allow_headers: ['X-Custom-Auth', 'Origin', 'Authorization', 'X-Requested-With', 'Content-Type', 'Accept']
+                allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+                max_age: 3600
+            '^/logged':
+                origin_regex: true
+                allow_origin: ['^http://localhost:[0-9]+']
+                allow_headers: ['X-Custom-Auth', 'Origin', 'Authorization', 'X-Requested-With', 'Content-Type', 'Accept']
+                allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+                max_age: 3600

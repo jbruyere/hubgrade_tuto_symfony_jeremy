@@ -82,6 +82,51 @@ class AuthTokenController extends FOSRestController
 		return $response;
     }
 
+	/**
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"auth-token"})
+     * @Rest\Delete("/logout")
+	 * @Route("/logout", name="user_tokens")
+     */
+	 // at least: token
+    public function LogoutAction(Request $request)
+    {
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidCredentials('User not connected.');
+		}
+		$this->getDoctrine()
+			->getRepository('AppBundle:User')->deleteToken($request);
+		$data = array(
+			'logout' => $user[0]['id']
+			);
+		$view = $this->view($data, 200);
+
+		return $this->handleView($view);
+	}
+
+	/**
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"auth-token"})
+     * @Rest\Get("/logged")
+	 * @Route("/logged", name="user_tokens")
+     */
+	 // at least: token
+    public function isLoggedAction(Request $request)
+    {
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			$data = array('log' =>  "false");
+		} else {
+			$data = array('log' => "true");
+		}
+		$view = $this->view($data, 200);
+
+		return $this->handleView($view);
+	}
+
     private function invalidCredentials($value)
     {
         $view = $this->view(array(

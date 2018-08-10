@@ -46,8 +46,11 @@ class UserController extends FOSRestController
 
 		$token = new AuthToken();
 		$tokenvalue = $request->headers->get('Authorization');
+		if (strncmp($tokenvalue, 'Bearer ', 7) == 0) {
+			$tokenvalue = substr($tokenvalue, 7);
+		}
 		$token = $em->getRepository('AppBundle:AuthToken')
-			->findOneByValue(substr($tokenvalue, 7));
+			->findOneByValue($tokenvalue);
 		$id = $token->getUser()->getId();
 		$user = $em->getRepository('AppBundle:User')
             ->findOneById($id);

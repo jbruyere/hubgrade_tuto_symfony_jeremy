@@ -31,11 +31,31 @@ class UserRepository extends EntityRepository
 	{
 	$qb = $this->getEntityManager()->createQueryBuilder();
 
+	if (strncmp($tokenvalue, 'Bearer ', 7) == 0) {
+		$tokenvalue = substr($tokenvalue, 7);
+	}
 	$qb->select('u.id')
 		->from('AppBundle:AuthToken', 'auth')
 		->leftJoin('auth.user', 'u')
 		->where('auth.value = :tokenvalue')
-		->setParameter('tokenvalue', substr($tokenvalue, 7));
+		->setParameter('tokenvalue', $tokenvalue);
+
+	return $qb->getQuery()->getResult();
+	}
+
+	public function deleteToken(Request $request)
+	{
+	$tokenvalue = $request->headers->get('Authorization');
+	$qb = $this->getEntityManager()->createQueryBuilder();
+
+	if (strncmp($tokenvalue, 'Bearer ', 7) == 0) {
+		$tokenvalue = substr($tokenvalue, 7);
+	}
+	$qb->delete()
+		->from('AppBundle:AuthToken', 'auth')
+		->leftJoin('auth.user', 'u')
+		->where('auth.value = :tokenvalue')
+		->setParameter('tokenvalue', $tokenvalue);
 
 	return $qb->getQuery()->getResult();
 	}
