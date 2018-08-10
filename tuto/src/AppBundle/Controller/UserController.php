@@ -99,6 +99,38 @@ class UserController extends FOSRestController
 		return $response;
 	}
 
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Post("/profil")
+	* @Route("/profil")
+	*/
+	// at least : username
+	public function readProfilAction(Request $request)
+	{
+		if ($request->get('username') == null) {
+			return $this->invalidUser('no username');
+		}
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')
+			->findUserByUsername($request->get('username'));
+		if ($user == null || $user[0] == null) {
+			return $this->invalidUser('not found');
+		}
+		$response = new Response();
+		$response->setContent(json_encode([
+			'username' => $user[0]->getUsername(),
+			'email' => $user[0]->getEmail(),
+			'pseudo' => $user[0]->getPseudo(),
+			'city' => $user[0]->getCity(),
+			'zipcode' => $user[0]->getZipcode(),
+			'phone' => $user[0]->getPhone(),
+			'bio' => $user[0]->getBio()
+		]));
+		$response->headers->set('Content-Type', 'application/json');
+		$response->headers->set('Access-Control-Allow-Origin', '*');
+		return $response;
+	}
+
 	private function invalidUser($value)
     {
         $view = $this->view(array(

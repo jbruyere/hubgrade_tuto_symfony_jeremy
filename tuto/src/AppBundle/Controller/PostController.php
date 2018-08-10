@@ -84,6 +84,41 @@ class PostController extends FOSRestController
 
 	/**
 	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Get("/post")
+	* @Route("/post")
+	*/
+	// at least: token
+	public function readAllPostAction(Request $request)
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidPost('User not connected');
+		}
+		$posts = $this->getDoctrine()
+			->getRepository('AppBundle:Post')->findPost();
+		if ($posts == null || $posts[0] == null) {
+			return $this->invalidPost('Invalid post');
+		}
+		$data = [];
+		foreach ($posts as $post) {
+			$data[] = array(
+				'user' => $post->getUser(),
+				'content' => $post->getContent(),
+				'date' => $post->getCreationDate()
+			);
+		}
+		
+		$response = new Response();
+		$response->setContent(json_encode($data));
+		$response->headers->set('Content-Type', 'application/json');
+		$response->headers->set('Access-Control-Allow-Origin', '*');
+		return $response;
+	}
+
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
 	* @Rest\Delete("/post/delete/{id}")
 	* @Route("/post/delete/{id}")
 	*/

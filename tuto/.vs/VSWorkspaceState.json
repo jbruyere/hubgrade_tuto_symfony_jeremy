@@ -8,9 +8,9 @@
     "\\src\\AppBundle\\Controller",
     "\\src\\AppBundle\\Entity",
     "\\src\\AppBundle\\Repository",
-    "\\src\\AppBundle\\Repository\\CommentRepository",
+    "\\src\\AppBundle\\Repository\\LikeRepository",
     "\\src\\AppBundle\\Repository\\PostRepository"
   ],
-  "SelectedNode": "\\src\\AppBundle\\Controller\\AuthTokenController.php",
+  "SelectedNode": "\\src\\AppBundle\\Controller\\PostController.php",
   "PreviewInSolutionExplorer": false
 }

@@ -43,6 +43,18 @@ class UserRepository extends EntityRepository
 	return $qb->getQuery()->getResult();
 	}
 
+	public function findUserByUsername($username)
+	{
+		$qb = $this->getEntityManager()->createQueryBuilder();
+
+		$qb->select('user')
+			->from('AppBundle:User', 'user')
+			->where('user.username = :username')
+			->setParameter('username', $username);
+
+		return $qb->getQuery()->getResult();
+	}
+
 	public function deleteToken(Request $request)
 	{
 	$tokenvalue = $request->headers->get('Authorization');
