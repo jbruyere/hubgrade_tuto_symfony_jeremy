@@ -118,6 +118,7 @@ class UserController extends FOSRestController
 		}
 		$response = new Response();
 		$response->setContent(json_encode([
+			'id' => $user[0]->getId(),
 			'username' => $user[0]->getUsername(),
 			'email' => $user[0]->getEmail(),
 			'pseudo' => $user[0]->getPseudo(),
@@ -125,6 +126,31 @@ class UserController extends FOSRestController
 			'zipcode' => $user[0]->getZipcode(),
 			'phone' => $user[0]->getPhone(),
 			'bio' => $user[0]->getBio()
+		]));
+		$response->headers->set('Content-Type', 'application/json');
+		$response->headers->set('Access-Control-Allow-Origin', '*');
+		return $response;
+	}
+
+	/**
+	* @Rest\View(statusCode=Response::HTTP_CREATED)
+	* @Rest\Get("/user")
+	* @Route("/user")
+	*/
+	// at least : token
+	public function getProfilAction(Request $request)
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserFromToken($request, $em);
+		if ($user == null || $user[0]['id'] == null) {
+			return $this->invalidUser('User not connected.');
+		}
+		$user = $this->getDoctrine()
+			->getRepository('AppBundle:User')->getUserById($user[0]['id']);
+		$response = new Response();
+		$response->setContent(json_encode([
+			'username' => $user[0]->getUsername()
 		]));
 		$response->headers->set('Content-Type', 'application/json');
 		$response->headers->set('Access-Control-Allow-Origin', '*');

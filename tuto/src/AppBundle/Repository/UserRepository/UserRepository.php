@@ -43,6 +43,18 @@ class UserRepository extends EntityRepository
 	return $qb->getQuery()->getResult();
 	}
 
+	public function getUserById($id)
+	{
+	$qb = $this->getEntityManager()->createQueryBuilder();
+
+	$qb->select('user')
+		->from('AppBundle:User', 'user')
+		->where('user.id = :id')
+		->setParameter('id', $id);
+
+	return $qb->getQuery()->getResult();
+	}
+
 	public function findUserByUsername($username)
 	{
 		$qb = $this->getEntityManager()->createQueryBuilder();

@@ -104,6 +104,7 @@ class PostController extends FOSRestController
 		$data = [];
 		foreach ($posts as $post) {
 			$data[] = array(
+				'id' => $post->getId(),
 				'user' => $post->getUser(),
 				'content' => $post->getContent(),
 				'date' => $post->getCreationDate()

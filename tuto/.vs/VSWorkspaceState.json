@@ -9,8 +9,8 @@
     "\\src\\AppBundle\\Entity",
     "\\src\\AppBundle\\Repository",
     "\\src\\AppBundle\\Repository\\LikeRepository",
-    "\\src\\AppBundle\\Repository\\PostRepository"
+    "\\src\\AppBundle\\Repository\\UserRepository"
   ],
-  "SelectedNode": "\\src\\AppBundle\\Controller\\PostController.php",
+  "SelectedNode": "\\src\\AppBundle\\Entity\\Post.php",
   "PreviewInSolutionExplorer": false
 }
